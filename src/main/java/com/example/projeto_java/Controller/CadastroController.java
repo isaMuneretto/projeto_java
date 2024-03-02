@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import com.example.projeto_java.Model.Cadastro;
 import com.example.projeto_java.Repository.CadastroRepository;
 
@@ -24,10 +25,11 @@ public class CadastroController {
     public String criar(Cadastro cadastro){
 
         pr.save(cadastro);
-        System.out.println(cadastro.getCodigo());
-
         return "/cadastro/criar";
     }
 
-    
+   
+
 }
+    
+

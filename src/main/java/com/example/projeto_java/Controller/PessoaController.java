@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.projeto_java.Model.Cargo;
 import com.example.projeto_java.Model.Pessoa;
+import com.example.projeto_java.Repository.CargoRepository;
 import com.example.projeto_java.Repository.PessoaRepository;
 
 @Controller
@@ -20,6 +22,9 @@ public class PessoaController {
 
     @Autowired
     private PessoaRepository pr;
+
+    @Autowired
+    private CargoRepository cr;
 
     @GetMapping("/pessoa/criar")
     public String criar(){
@@ -30,8 +35,13 @@ public class PessoaController {
     @PostMapping("/pessoa/criar")
     public String criar(Pessoa pessoa){
 
+        Cargo cargo = cr.getReferenceById(Long.parseLong("1"));
+        Cargo cargo2 = cr.getReferenceById(Long.parseLong("2"));
+        pessoa.addCargos(cargo); 
+        pessoa.addCargos(cargo2); 
+
         pr.save(pessoa);
-        return "redirect:/cadastro/criar";
+        return "redirect:/pessoa/listar";
     }
 
     //UPDATE pessoa SET ativo = 0 WHERE id=3  código manual SQL
@@ -66,7 +76,6 @@ public class PessoaController {
 
         return "redirect:/pessoa/listar";
     }
-
 
     @GetMapping("/pessoa/deletar/{id}")
     public String deletar(@PathVariable Long id){

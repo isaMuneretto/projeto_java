@@ -18,12 +18,22 @@
                     <th>#</th>
                     <th>Nome</th>
                     <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Cargo</th>
                     <th>Ações</th>
                 </tr>
                 <tr th:each="pessoa : ${pessoas}"> <!--variavel enviada pelo controller-->
                     <td th:text="${pessoa.id}"></td>
                     <td th:text="${pessoa.nome}"></td>
                     <td th:text="${pessoa.cpf}"></td>
+                    <td th:text="${pessoa.email}"></td>
+                    <!-- <td th:text="${pessoa.cargo.nome}"></td> -->
+                    <td>
+                        <p th:each="c : ${pessoa.cargos}">
+                            <b th:text="${c.nome}"></b>
+
+                        </p>
+                    </td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/pessoa/alterar/{id}(id=${pessoa.id})}">Alterar</a>
                         <a class="btn btn-danger" th:href="@{/pessoa/deletar/{id}(id=${pessoa.id})}">Deletar</a> 
